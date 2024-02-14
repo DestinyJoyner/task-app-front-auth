@@ -1,3 +1,35 @@
-/* .container {
-    border: 2px solid blue;
-} */
+.App {
+    
+    row-gap: 4vh;
+}
+
+.grid {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+nav a:hover {
+    transform: scale(1.2);
+    color: navy;
+}
+
+.homePage h2 {
+    text-align: center;
+}
+
+.signUpForm {
+    row-gap: 3vh;
+}
+
+.signUpForm_label {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vh;
+}

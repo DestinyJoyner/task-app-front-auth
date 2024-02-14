@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap'
 
 const Signup = ({ setUser, setToken }) => {
     const API = import.meta.env.VITE_BASE_URL
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -10,10 +12,10 @@ const Signup = ({ setUser, setToken }) => {
     })
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target
+        const { id, value } = event.target
         setFormData((prev) => ({
             ...prev,
-            [name]: value
+            [id]: value
         }))
     }
 
@@ -37,6 +39,7 @@ const Signup = ({ setUser, setToken }) => {
                         email: '',
                         password_hash: ''
                     }))
+                    navigate('/tasks');
                 } else {
                     console.log(res)
                 }
@@ -45,47 +48,40 @@ const Signup = ({ setUser, setToken }) => {
     }
 
     return (
-        <Container style={{ marginTop: "50px" }}>
-            <Row className="justify-content-md-center">
-                <Col md={6}>
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" controlId="username">
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter your username"
-                                name="username"
-                                value={formData.username}
-                                onChange={handleInputChange}
-                            />
-                        </Form.Group>
+       <form 
+       className='signUpForm grid'
+       onSubmit={handleSubmit}>
 
-                        <Form.Group className="mb-3" controlId="email">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Enter your email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleInputChange}
-                            />
-                        </Form.Group>
+        <label className='signUpForm_label'> Username:
+            <input
+            type="text"
+            placeholder='Enter your username'
+            id='username'
+            value={formData.username}
+            onChange={handleInputChange} />
+        </label>
 
-                        <Form.Group className="mb-3" controlId="password_hash">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Enter your password"
-                                name="password_hash"
-                                value={formData.password_hash}
-                                onChange={handleInputChange}
-                            />
-                        </Form.Group>
-                        <Button variant="primary" type="submit">Submit</Button>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
+        <label className='signUpForm_label'>Email:
+            <input
+            type="text"
+            placeholder='Enter your email'
+            id='email'
+            value={formData.email}
+            onChange={handleInputChange} />
+        </label>
+
+        <label className='signUpForm_label'> Password:
+            <input 
+            type="password"
+            placeholder='Enter your password'
+            id='password_hashh'
+            value={formData.passord_hash}
+            onChange={handleInputChange}/>
+        </label>
+
+        <input type="submit" />
+
+       </form>
     );
 };
 
