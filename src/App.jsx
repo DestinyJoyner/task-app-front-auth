@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import { useAuthDataProvider } from "./Providers/AuthProvider";
 import Home from "./Pages/Home";
 import NavBar from "./Components/NavBar";
 import Signup from "./Pages/Signup";
@@ -9,6 +10,7 @@ import ProtectedRoute from "./Pages/ProtectedRoute";
 import Tasks from "./Components/Tasks";
 
 function App() {
+  const {isAuthenticated} = useAuthDataProvider()
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
@@ -26,7 +28,7 @@ function App() {
 
         <Route
           path="/login"
-          element={<Login setUser={setUser} setToken={setToken} />}
+          element={<Login />}
         />
 
         <Route
@@ -34,9 +36,7 @@ function App() {
           element={
             <ProtectedRoute
               element={Tasks}
-              isAuthenticated={!!user && !!token}
-              user={user}
-              token={token}
+              isAuthenticated={isAuthenticated}
             />
           }
         />

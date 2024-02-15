@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Container } from 'react-bootstrap';
+import { useAuthDataProvider } from '../Providers/AuthProvider';
 
-const Tasks = ({ user, token }) => {
-  const API = import.meta.env.VITE_BASE_URL
+const Tasks = () => {
+  // const API = import.meta.env.VITE_BASE_URL
+  const {API, user, token} = useAuthDataProvider()
   const [tasks, setTasks] = useState([])
+
 
 
   const completeTask = (id) => {

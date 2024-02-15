@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useAuthDataProvider } from '../Providers/AuthProvider';
 
-const Login = ({ setUser, setToken }) => {
-  const API = import.meta.env.VITE_BASE_URL
+
+const Login = () => {
+  // const API = import.meta.env.VITE_BASE_URL
+  const {API, setUser, setToken} = useAuthDataProvider()
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
